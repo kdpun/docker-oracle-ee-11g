@@ -68,7 +68,7 @@ case "$1" in
 			su oracle -c "/u01/app/oracle/product/11.2.0/EE/bin/tnslsnr &"
 			#create DB for SID: EE
 			echo "Running initialization by dbca"
-			su oracle -c "$ORACLE_HOME/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -gdbname EE.oracle.docker -sid EE -responseFile NO_VALUE -characterSet $CHARACTER_SET -totalMemory $DBCA_TOTAL_MEMORY -emConfiguration LOCAL -dbsnmpPassword oracle -sysPassword oracle -systemPassword oracle"
+			su oracle -c "$ORACLE_HOME/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -gdbname EE.oracle.docker -sid EE -responseFile NO_VALUE -characterSet $CHARACTER_SET -totalMemory $DBCA_TOTAL_MEMORY -emConfiguration LOCAL -initParams memory_target=0,sga_target=500,pga_aggregate_target=100,java_jit_enabled=false -dbsnmpPassword oracle -sysPassword oracle -systemPassword oracle"
 			
 			# echo "Configuring Apex console"
 			# cd $ORACLE_HOME/apex
